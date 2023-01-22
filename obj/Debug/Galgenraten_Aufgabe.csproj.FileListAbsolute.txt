@@ -1,0 +1,8 @@
+C:\Users\admin\source\repos\Galgenraten_Aufgabe\Galgenraten_Aufgabe\bin\Debug\Galgenraten_Aufgabe.exe.config
+C:\Users\admin\source\repos\Galgenraten_Aufgabe\Galgenraten_Aufgabe\bin\Debug\Galgenraten_Aufgabe.exe
+C:\Users\admin\source\repos\Galgenraten_Aufgabe\Galgenraten_Aufgabe\bin\Debug\Galgenraten_Aufgabe.pdb
+C:\Users\admin\source\repos\Galgenraten_Aufgabe\Galgenraten_Aufgabe\obj\Debug\Galgenraten_Aufgabe.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\Galgenraten_Aufgabe\Galgenraten_Aufgabe\obj\Debug\Galgenraten_Aufgabe.csproj.SuggestedBindingRedirects.cache
+C:\Users\admin\source\repos\Galgenraten_Aufgabe\Galgenraten_Aufgabe\obj\Debug\Galgenraten_Aufgabe.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\Galgenraten_Aufgabe\Galgenraten_Aufgabe\obj\Debug\Galgenraten_Aufgabe.exe
+C:\Users\admin\source\repos\Galgenraten_Aufgabe\Galgenraten_Aufgabe\obj\Debug\Galgenraten_Aufgabe.pdb

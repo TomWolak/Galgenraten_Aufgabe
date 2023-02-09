@@ -9,11 +9,17 @@ using System.Threading.Tasks;
 
 namespace Galgenraten_Aufgabe
 {
+    // static List<string> slowa = new List<string> { "polska", "niemcy", "czechy", "slowacja", "ukraina"};
+
     internal class Program
     {
+        static List<string> worte = new List<string> { "polen", "deutschland", "tschechein", "slowakei", "ukrainien"};
         static void Main(string[] args)
         {
-            Wort wort = new Wort("madagaskar");  // Wort, das erraten werden muss
+            Random random = new Random();
+
+            
+            Wort wort = new Wort(worte[random.Next() % worte.Count]);  // Wort, das erraten werden muss
             int maxAnzahlProbe = 10;
             int verwendetProbe = 0;
             bool obGeloest = false;

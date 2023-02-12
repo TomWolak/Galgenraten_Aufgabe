@@ -1,47 +1,51 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Galgenraten_Aufgabe
 {
-    // static List<string> slowa = new List<string> { "polska", "niemcy", "czechy", "slowacja", "ukraina"};
-
     internal class Program
     {
-        static List<string> worte = new List<string> { "polen", "deutschland", "tschechein", "slowakei", "ukrainien"};
-        static void Main(string[] args)
+        private static List<string> worte = new List<string> { "DEUTSCHLAND", "POLEN", "SLOWAKEI", "SCHWEDEN", "TSCHECHIEN" };
+
+        private static void Main(string[] args)
         {
             Random random = new Random();
 
-            
-            Wort wort = new Wort(worte[random.Next() % worte.Count]);  // Wort, das erraten werden muss
+            Wort wort = new Wort(worte[random.Next() % worte.Count]);
             int maxAnzahlProbe = 10;
             int verwendetProbe = 0;
             bool obGeloest = false;
-            Console.WriteLine("Das geheimes Lösungswort hat so viele Buchstaben ");
+
             while (verwendetProbe < maxAnzahlProbe)
             {
                 try
                 {
+                    Console.Clear();
+                    Console.WriteLine("Das geheimes Lösungswort hat so viele Buchstaben ");
                     Console.WriteLine("                      " + wort.Entnehmen());
+
                     Console.WriteLine("Erraten Sie einen Buchstabe!    <" + verwendetProbe + " Versuche von 10 bereits verwendet>");
-                    char benutzerBuchstabeAntwort = Convert.ToChar(Console.ReadLine());
-                    char benutzerBuchstabeAntwort_ToLower = Char.ToLower(benutzerBuchstabeAntwort);
-                    wort.ErratenBuchstabe(benutzerBuchstabeAntwort_ToLower);
+                    Console.WriteLine();
+
+                    Console.WriteLine("Diese Buchstaben wurden bereits verwendet:  ");
+                    foreach (char c in wort.verwendeteBuchstaben)
+                    {
+                        Console.Write(c + " ");
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine("Das geheime Wort ist bereits so weit erraten: " + wort.Entnehmen());
+                    // Console.WriteLine(wort.Entnehmen());
+                    char benutzerBuchstabeAntwort = Convert.ToChar(Console.ReadLine().ToUpper());
+                    if (wort.ErratenBuchstabe(benutzerBuchstabeAntwort) == false)
+                        continue;
                     if (wort.ObErraten())
                         break;
                 }
-                catch
-                {
-                    Console.WriteLine("Error! Sie müssen einen buchstabe eintragen - Versuchen Sie es noch einmal.");
-                }
+                catch { };
 
-                Console.WriteLine(wort.Entnehmen());
+                Console.Clear();
+                Console.WriteLine("Das geheime Wort ist bereits so weit erraten: " + wort.Entnehmen());
+                Console.WriteLine();
                 Console.WriteLine("Jetzt können Sie das ganze Wort versuchen zu erraten");
                 Console.WriteLine("Wenn Sie scheitern, verlieren Sie!");
                 Console.WriteLine();
@@ -50,10 +54,9 @@ namespace Galgenraten_Aufgabe
                 if (input == "ja")
                 {
                     Console.WriteLine("Sie haben <ja> gesagt. Geben Sie unten das vollständige Wort ein:");
-                    string benutzerWortAntwort = Convert.ToString(Console.ReadLine());
-                    string benutzerWortAntwort_ToLower = benutzerWortAntwort.ToLower();
-                    obGeloest = benutzerWortAntwort_ToLower == wort.EntnehmenOeffentlich();
-                    if (benutzerWortAntwort_ToLower == wort.EntnehmenOeffentlich())
+                    string benutzerWortAntwort = Convert.ToString(Console.ReadLine().ToUpper());
+                    obGeloest = benutzerWortAntwort == wort.EntnehmenOeffentlich();
+                    if (benutzerWortAntwort == wort.EntnehmenOeffentlich())
                     {
                         Console.WriteLine("Bravo! Du hast das Wort erraten");
                         Console.ReadLine();
@@ -87,10 +90,13 @@ namespace Galgenraten_Aufgabe
         public class Wort
         {
             public List<BuchstabeEinesWortes> ListeDerBuchstaben;
+            public List<char> verwendeteBuchstaben;
 
             public Wort(string wort)
             {
                 ListeDerBuchstaben = new List<BuchstabeEinesWortes>();
+
+                verwendeteBuchstaben = new List<char>();
 
                 foreach (char c in wort)
                 {
@@ -110,6 +116,7 @@ namespace Galgenraten_Aufgabe
                 }
                 return true;
             }
+
             public string Entnehmen()
             {
                 string aufschrift = "";
@@ -127,8 +134,15 @@ namespace Galgenraten_Aufgabe
                 return aufschrift;
             }
 
-            public void ErratenBuchstabe(char zeichen)
+            public bool ErratenBuchstabe(char zeichen)
             {
+                if (verwendeteBuchstaben.Contains(zeichen))
+                {
+                    return false;
+                }
+
+                verwendeteBuchstaben.Add(zeichen);
+
                 foreach (BuchstabeEinesWortes eb_buchstabe in ListeDerBuchstaben)
                 {
                     if (zeichen == eb_buchstabe.buchstabe)
@@ -136,6 +150,7 @@ namespace Galgenraten_Aufgabe
                         eb_buchstabe.ist_erraten = true;
                     }
                 }
+                return true;
             }
 
             public string EntnehmenOeffentlich()
@@ -167,14 +182,13 @@ namespace Galgenraten_Aufgabe
     public class Wort - eine Klasse mit Methoden
     Wort(string wort) - ein Konstruktor
     wort - ein Objekt der Klasse Wort
-    Entnehmen()  - eine Methode der Klasse Wort 
+    Entnehmen()  - eine Methode der Klasse Wort
     ErratenBuchstabe() - eine Methode der Klasse Wort
     ObErraten() - eine Methode der Klasse Wort
     EntnehmenOeffentlch() - eine Methode der Klasse Wort
 
-    BuchstabeEinesWortes - eine Klasse 
+    BuchstabeEinesWortes - eine Klasse
 
     ListeDerBuchstaben - container
-
 
 */

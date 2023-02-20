@@ -34,7 +34,7 @@ namespace Galgenraten_Aufgabe
                     }
                     Console.WriteLine();
                     Console.WriteLine("Das geheime Wort ist bereits so weit erraten: " + wort.Entnehmen());
-                    // Console.WriteLine(wort.Entnehmen());
+                    
                     char benutzerBuchstabeAntwort = Convert.ToChar(Console.ReadLine().ToUpper());
                     if (wort.ErratenBuchstabe(benutzerBuchstabeAntwort) == false)
                         continue;
@@ -82,6 +82,7 @@ namespace Galgenraten_Aufgabe
             else
             {
                 Console.WriteLine("You Lost the Game!");
+                Console.WriteLine("Das geheimes Lösungswort war " + wort.EntnehmenOeffentlich());
             }
 
             Console.ReadLine();
